@@ -1,0 +1,47 @@
+﻿@model TrainReserveSystem.Models.Train_Detail
+
+
+@{
+    ViewBag.Title = "Train_detail_with_passenger_detail";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h2>Train Details</h2>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Date of Journey</th>
+                <th>Passenger Count</th>
+                <th>Train Name</th>
+                <th>Train Number</th>
+                <th>Fare Per Person</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach(var trains in (Session["trainlist"] as List<TrainReserveSystem.Models.Train_Detail>))
+            {
+            <tr>
+                <td>@Session["source"]</td>
+                <td>@Session["destination"]</td>
+                <td>@Session["doj"]</td>
+                <td>@Session["passengercount"]</td>
+                <td>@trains.Train_Name;</td>
+                <td>@trains.Train_Number</td>
+                <td>@trains.Fare</td>
+                <td>@Html.ActionLink("Book", "Book", new { id = trains.Train_Detail_ID })</td>
+                
+            </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+
+}
